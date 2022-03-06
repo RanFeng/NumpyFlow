@@ -39,8 +39,8 @@ if __name__ =='__main__':
     IMAGE_SIZE = 28
     CLASS_SIZE = 10
     x_train, y_train, x_test, y_test = mnist.load()
-    x_train = x_train.astype(np.float)
-    x_test = x_test.astype(np.float)
+    x_train = x_train.astype(float)
+    x_test = x_test.astype(float)
     x_train = x_train / x_train.max()
     x_test  = x_test / x_test.max()
     y_train = np.eye(10)[y_train]

@@ -109,7 +109,7 @@ class Tensor:
             grad = np.ones_like(self.data, dtype=np.float64)
         if isinstance(grad, Tensor):
             grad = grad.data
-        if isinstance(self.creator, Assign) or True:
+        if isinstance(self.creator, Assign) or True: # 计算原子
             if self.grad is None:
                 self.grad = np.zeros_like(self.data, dtype=np.float64)
 
