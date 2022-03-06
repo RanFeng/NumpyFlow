@@ -16,6 +16,8 @@ __pycache__/
 # C extensions
 *.so
 
+*.egg-info/
+
 # Distribution / packaging
 .Python
 build/

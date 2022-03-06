@@ -1,7 +1,7 @@
 import nf
 from .ops.activation import *
 from .ops.conv import *
-from .ops.batchnorm import *
+# from .ops.batchnorm import *
 
 from nf import Tensor
 import numpy as np
