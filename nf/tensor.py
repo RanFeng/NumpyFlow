@@ -21,12 +21,12 @@ class Tensor:
             data = [data]
         if isinstance(data, (list, tuple)):
             data = np.array(data)
-        if isinstance(data, (np.ndarray, np.float, np.float32, np.float64)):
+        if isinstance(data, np.ndarray):
             self.data = data.copy()
         elif isinstance(data, Tensor):
             raise ValueError("输入的是 Tensor")
         else:
-            raise ValueError("输入的是什么几把？", type(data), data)
+            raise ValueError("输入类型未知", type(data), data)
         self.requires_grad = requires_grad
 
         if creator is None:

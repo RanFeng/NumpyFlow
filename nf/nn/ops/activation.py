@@ -9,17 +9,6 @@ __all__ = ['ReLU','Sigmoid','Softmax']
 
 class ReLU(Operation):
     def __call__(self, a):
-        """ Performs 'add' forward-pass: f(a,b) -> a + b
-
-            Parameters
-            ----------
-            a : Tensor
-            b : Tensor
-
-            Returns
-            -------
-            out : numpy.ndarray """
-
         self.variables = (a,)
         self.mask = a.data>0.0
         out = a.data * self.mask
@@ -46,17 +35,6 @@ class Sigmoid(Operation):
 
 class Softmax(Operation):
     def __call__(self, a, dim):
-        """ Performs 'add' forward-pass: f(a,b) -> a + b
-
-            Parameters
-            ----------
-            a : Tensor
-            b : Tensor
-
-            Returns
-            -------
-            out : numpy.ndarray """
-
         self.variables = (a,)
         self.dim = dim
         # print(a.data)

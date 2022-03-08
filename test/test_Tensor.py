@@ -6,22 +6,23 @@ from time import time
 
 
 def func(x,y,z):
-    f0 = (x[1,0].T * y[0,1].T).T * z * x
-    f1 = f0 * (x + y + z) * y * y * y * (y+z) #! 有错[9,23,29]
-    f2 = y[0,3] + x[0,2]
-    f3 = y * y - z
-    f4 = z - x
-    f5 = -x.flatten() + y.flatten() - (x*z).flatten() * 2.0
-    f6 = f1[1,3] + f1[0,3] * f2 - z[0,1] ** 2.2
-    f7 = f3 + f4 + f6
-    f8 = f7 - f3 + f4 * 3.6
-    f9 = f8.flatten() / f5 + f7.flatten()
-    f10 = -f9 * f5
-    f11 = ((x*z) @ x.transpose(3, 4) @ y.permute(0,4,2,3,1)).transpose(0,4)
-    f12 = f11.transpose(3,4).flatten() * 5.0 ** x.transpose(1,4).flatten() / y.flatten() * (x/z).flatten() + 2.0
-    f13 = f10.reshape(f11.shape) * f11 / f12.reshape(f11.shape)
-    f14 = (x.transpose(3,4) @ y).permute(0,2,4,3,1) @ f13.permute(4,2,0,1,3)
-    f15 = f14.sum() * f14.mean((0,2))
+    # f0 = (x[1,0].T * y[0,1].T).T * z * x
+    # f1 = f0 * (x + y + z) * y * y * y * (y+z) #! 有错[9,23,29]
+    # f2 = y[0,3] + x[0,2]
+    # f3 = y * y - z
+    # f4 = z - x
+    # f5 = -x.flatten() + y.flatten() - (x*z).flatten() * 2.0
+    # f6 = f1[1,3] + f1[0,3] * f2 - z[0,1] ** 2.2
+    # f7 = f3 + f4 + f6
+    # f8 = f7 - f3 + f4 * 3.6
+    # f9 = f8.flatten() / f5 + f7.flatten()
+    # f10 = -f9 * f5
+    # f11 = ((x*z) @ x.transpose(3, 4) @ y.permute(0,4,2,3,1)).transpose(0,4)
+    # f12 = f11.transpose(3,4).flatten() * 5.0 ** x.transpose(1,4).flatten() / y.flatten() * (x/z).flatten() + 2.0
+    # f13 = f10.reshape(f11.shape) * f11 / f12.reshape(f11.shape)
+    # f14 = (x.transpose(3,4) @ y).permute(0,2,4,3,1) @ f13.permute(4,2,0,1,3)
+    # f15 = f14.sum() * f14.mean((0,2))
+    f15 = x @ y @ z
     return f15
 
 def th_grad_Test(x,y,z):
@@ -56,8 +57,8 @@ def nf_grad_Test(x,y,z):
 def test1():
     np.random.seed(28)
     x = np.random.random([2,4,6,3,4])
-    y = np.random.random([2,4,6,3,4])
-    z = np.random.random([2,4,1,1,4])
+    y = np.random.random([2,4,6,4,7])
+    z = np.random.random([2,4,1,7,1])
 
     grad_th = th_grad_Test(x,y,z)
     grad_nf = nf_grad_Test(x,y,z)
